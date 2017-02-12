@@ -63,9 +63,7 @@ class Timer {
     if (isset(static::$timers[$key])) {
       return static::processTimerValue(static::$timers[$key], $format);
     }
-    else {
-      throw new \LogicException('Reading timer when the given key timer was not initialized.');
-    }
+    throw new \LogicException('Reading timer when the given key timer was not initialized.');
   }
 
   static public function stop($key = 'default') {
