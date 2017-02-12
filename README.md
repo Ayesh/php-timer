@@ -5,7 +5,7 @@
 ## Synopsis
 A helper class to calculate how long a particular task took. 
 
-This class is similar to phpunit/php-timer, but this is not a fork, nor mimic its functionality. 
+This class is similar to phpunit/php-timer, but not a fork, nor mimic its functionality. 
 
  - Multiple timers with by a given key. 
  - Read the current time elapsed without stopping the timer. 
@@ -44,7 +44,7 @@ You can of course use PHP magic constants to make things easier:
 Attempting to start the timer with a non-scalar key will throw an `\InvalidArgumentException` exception.
 
 ####Read timer
-After starting the timer, you can read the elapsed time at anytime. Reading the time will not stop the timer. You can read the timer, do some expensive calculations, and read again to get the cumulative time. 
+After starting the timer, you can read the elapsed time at any time. Reading the time will not stop the timer. You can read the timer, do some expensive calculations, and read again to get the cumulative time. 
 
     Timer::read(); // Default timer. 
     Timer::read('default'); // Default timer. 
@@ -68,7 +68,7 @@ Attempting to stop a timer that is not started will throw an `\LogicException` e
 
 #### Reset timer
 By default, starting the timer after stopping it will continue it from where it left off. For example, if you have 3 seconds on the timer when you stop it, and start it again, the total time will start from 3 seconds. You can explicitly reset the timer to make it start from 0. 
-Resetting the timer will not make the timer start again. You need to explicitly start the timer again with a `TImer::start()` call. 
+Resetting the timer will not make the timer start again. You need to explicitly start the timer again with a `Timer::start()` call. 
 
     Timer::reset(); // Default timer. 
     Timer::reset('something'); 
@@ -77,7 +77,7 @@ Resetting the timer will not make the timer start again. You need to explicitly 
 ## Formats
 Currently, the following formats are provided:
 
- - `FORMAT_PRECISE`: Precise timer value, without rounding it. e.g `0.10180473327637`
+ - `FORMAT_PRECISE`: Precise timer value, without rounding it. e.g. `0.10180473327637`
  - `FORMAT_MILLISECONDS`:  Time in milliseconds, rounded to 2 decimals.
  - `FORMAT_SECONDS`: Time in seconds, rounded to 3 decimals. 
 
@@ -89,7 +89,7 @@ Currently, the following formats are provided:
     
     Timer::start();
     // do your processing here.
-    $time = Timer::read('defau;t', Timer::FORMAT_SECONDS);
+    $time = Timer::read('default', Timer::FORMAT_SECONDS);
     echo "Script took {$time} second(s)";
 
 #### Stop watch functionality, with stop-and-go timer calculated separately.
@@ -102,7 +102,7 @@ Currently, the following formats are provided:
     sleep(1);
     Timer::stop('laps');
     
-    sleep(2);
+    sleep(2); // This time is not calculated under 'laps'
     
     Timer::start('laps');
     sleep(1);
