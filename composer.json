@@ -1,0 +1,13 @@
+{
+    "name": "ayesh/php-timer",
+    "description": "Timer start, stop, read, and minimal conversion.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ayesh Karunaratne",
+            "email": "ayeshlakmal@gmail.com"
+        }
+    ],
+    "require": {}
+}
