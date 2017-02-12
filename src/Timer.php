@@ -2,9 +2,12 @@
 
 namespace Ayesh\PHP_Timer;
 
+use PHPUnit\Framework\Exception;
+
 class Timer {
   const FORMAT_MILISECONDS = 1;
   const FORMAT_SECONDS = 1000;
+  const FORMAT_PRECISE = 0;
 
   static $timers = [];
 
@@ -17,9 +20,18 @@ class Timer {
     if (!is_scalar($key)) {
       throw new \InvalidArgumentException('Key should be a scalar value.');
     }
+    elseif (isset(static::$timers[$key])) {
+      if (is_array(static::$timers[$key])) {
+        static::$timers[$key] = static::$timers[$key][0];
+      }
+    }
     else {
       static::$timers[$key] = static::getCurrentTime();
     }
+  }
+
+  static public function reset($key = 'default') {
+    unset(static::$timers[$key]);
   }
 
   final static protected function processTimerValue($value, $format) {
@@ -30,13 +42,19 @@ class Timer {
   }
 
   static protected function formatTime($value, $format) {
-    if (!defined('static::'. $format)) {
-      throw new \InvalidArgumentException('Unknown format.');
-    }
-
     switch ($format) {
+
+      case static::FORMAT_PRECISE;
+        return $value * 1000;
+
+      case static::FORMAT_MILISECONDS:
+        return round($value * 1000, 2);
+
+      case static::FORMAT_SECONDS:
+        return round($value, 3);
+
       default:
-        return $value / $format;
+        return $value * 1000;
     }
   }
 
@@ -49,7 +67,7 @@ class Timer {
     }
   }
 
-  static public function stop($key) {
+  static public function stop($key = 'default') {
     if (isset(static::$timers[$key])) {
       if (!is_array(static::$timers[$key])) {
         static::$timers[$key] = [
