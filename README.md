@@ -7,23 +7,23 @@ A helper class to calculate how long a particular task took.
 
 This class is similar to phpunit/php-timer, but not a fork, nor mimic its functionality. 
 
- - Multiple timers with by a given key. 
+ - Multiple timers by a given key. 
  - Read the current time elapsed without stopping the timer. 
- - Stop the timer, and continue from where it left.
+ - Stop the timer, and continue from where it left (stopwatch).
  - Dead simple API with only 4 static methods.
  - 100% unit test coverage.
- - Gets your precise time in milliseconds (with options to convert to seconds)
+ - Gets you precise time in milliseconds (with options to convert to seconds)
 
 ## Prerequisites
 
- - PHP 7.0 or later
+ - PHP 7.*.
  
 ## Installing
 The simplest way would be to install using [composer](https://getcomposer.org). 
 
     composer require ayesh/php-timer
     
-If, for some reason, you can't use Composer, or don't want to (oh come on!), you can integrate the class with your current `PSR-4` autoloader by mapping `Ayesh\PHP_TIMER` namespace to the repository's `src` folder. 
+If, for some reason you can't use Composer, or don't want to (oh come on!), you can integrate the class with your current `PSR-4` autoloader by mapping `Ayesh\PHP_TIMER` namespace to the repository's `src` folder. 
 
 ##Usage
 It is pretty simple to use the timer, with all methods being static, and allowing only 4 methods. 
