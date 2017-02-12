@@ -96,11 +96,11 @@ class TimerTest extends TestCase {
     $this->assertGreaterThanOrEqual('1', $read);
   }
 
-  public function testTimerFormat_Miliseconds() {
+  public function testTimerFormat_Milliseconds() {
     Timer::start(__FUNCTION__);
 
     usleep(1000);
-    $read = Timer::read(__FUNCTION__, Timer::FORMAT_MILISECONDS);
+    $read = Timer::read(__FUNCTION__, Timer::FORMAT_MILLISECONDS);
     $this->assertGreaterThanOrEqual('1', $read);
   }
 
@@ -116,7 +116,7 @@ class TimerTest extends TestCase {
     $this->assertInternalType('double', Timer::read(__FUNCTION__));
   }
 
-  public function testDenyAccessWithoutInititializing() {
+  public function testDenyAccessWithoutInitializing() {
     $this->expectException(\LogicException::class);
     Timer::resetAll();
     Timer::read();

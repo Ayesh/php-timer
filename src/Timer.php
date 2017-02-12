@@ -4,7 +4,7 @@ namespace Ayesh\PHP_Timer;
 
 class Timer {
   const FORMAT_PRECISE = FALSE;
-  const FORMAT_MILISECONDS = 'ms';
+  const FORMAT_MILLISECONDS = 'ms';
   const FORMAT_SECONDS = 's';
 
   private static $timers = [];
@@ -48,7 +48,7 @@ class Timer {
       case static::FORMAT_PRECISE;
         return $value * 1000;
 
-      case static::FORMAT_MILISECONDS:
+      case static::FORMAT_MILLISECONDS:
         return round($value * 1000, 2);
 
       case static::FORMAT_SECONDS:
@@ -59,7 +59,7 @@ class Timer {
     }
   }
 
-  static public function read($key = 'default', $format = self::FORMAT_MILISECONDS) {
+  static public function read($key = 'default', $format = self::FORMAT_MILLISECONDS) {
     if (isset(static::$timers[$key])) {
       return static::processTimerValue(static::$timers[$key], $format);
     }
@@ -79,7 +79,7 @@ class Timer {
       }
     }
     else {
-      throw new \LogicException('Stoping timer when the given key timer was not initialized.');
+      throw new \LogicException('Stopping timer when the given key timer was not initialized.');
     }
   }
 }
