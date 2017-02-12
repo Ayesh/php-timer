@@ -1,13 +1,28 @@
 {
     "name": "ayesh/php-timer",
-    "description": "Timer start, stop, read, and minimal conversion.",
+    "description": "Timer start, stop, read, and minimal conversion. Not phpunit/php-timer I promise.",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Ayesh Karunaratne",
-            "email": "ayeshlakmal@gmail.com"
+            "email": "ayesh@ayesh.me"
         }
     ],
-    "require": {}
+    "require": {
+        "php": "^5.6 || ^7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ayesh\\PHP_Timer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ayesh\\PHP_Timper\\Test\\": "tests"
+        }
+    }
 }
