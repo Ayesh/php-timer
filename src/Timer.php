@@ -18,12 +18,17 @@ class Timer {
       throw new \InvalidArgumentException('Key should be a scalar value.');
     }
     elseif (isset(static::$timers[$key])) {
-      if (is_array(static::$timers[$key])) {
-        static::$timers[$key] = static::$timers[$key][0];
+      if (empty(static::$timers[$key][0])) {
+        static::$timers[$key][0] = true;
+        static::$timers[$key][1] = static::getCurrentTime();
       }
     }
     else {
-      static::$timers[$key] = static::getCurrentTime();
+      static::$timers[$key] = [
+        true,
+        static::getCurrentTime(),
+        0
+      ];
     }
   }
 
@@ -36,10 +41,12 @@ class Timer {
   }
 
   final static protected function processTimerValue($value, $format) {
-    if (is_array($value)) {
-      return static::formatTime($value[1] - $value[0], $format);
+    if ($value[0]) {
+      return static::formatTime((static::getCurrentTime() - $value[1]) + $value[2], $format);
     }
-    return static::formatTime(static::getCurrentTime() - $value, $format);
+    else {
+      return static::formatTime($value[2], $format);
+    }
   }
 
   static protected function formatTime($value, $format) {
@@ -68,15 +75,9 @@ class Timer {
 
   static public function stop($key = 'default') {
     if (isset(static::$timers[$key])) {
-      if (!is_array(static::$timers[$key])) {
-        static::$timers[$key] = [
-          static::$timers[$key],
-          static::getCurrentTime(),
-        ];
-      }
-      else {
-        static::$timers[$key][1] = static::getCurrentTime();
-      }
+      $ct = static::getCurrentTime();
+      static::$timers[$key][0] = false;
+      static::$timers[$key][2] = static::$timers[$key][2] + ($ct - static::$timers[$key][1]);
     }
     else {
       throw new \LogicException('Stopping timer when the given key timer was not initialized.');

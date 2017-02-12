@@ -68,6 +68,19 @@ class TimerTest extends TestCase {
     $this->assertTrue($timer_3 > $timer_2);
   }
 
+  public function testStopAndGoTimer() {
+    Timer::start(__FUNCTION__);
+    usleep(1000);
+    Timer::stop(__FUNCTION__);
+    usleep(5000);
+    Timer::start(__FUNCTION__);
+    usleep(2000);
+    $timer = Timer::read(__FUNCTION__, Timer::FORMAT_SECONDS);
+
+    $this->assertGreaterThanOrEqual(0.003, $timer);
+    $this->assertLessThan(0.008, $timer);
+  }
+
   public function testResetRestsTimer() {
     Timer::resetAll();
     Timer::start(__FUNCTION__);
@@ -90,18 +103,18 @@ class TimerTest extends TestCase {
 
   public function testTimerFormat_Unspecified() {
     Timer::start(__FUNCTION__);
-
     usleep(1000);
     $read = Timer::read(__FUNCTION__, 'unspecified');
+
     $this->assertGreaterThanOrEqual('1', $read);
   }
 
   public function testTimerFormat_Milliseconds() {
     Timer::start(__FUNCTION__);
-
     usleep(1000);
     $read = Timer::read(__FUNCTION__, Timer::FORMAT_MILLISECONDS);
-    $this->assertGreaterThanOrEqual('1', $read);
+
+    $this->assertGreaterThanOrEqual(1, $read);
   }
 
   public function testStopWithoutInitializing() {
