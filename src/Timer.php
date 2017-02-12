@@ -2,15 +2,12 @@
 
 namespace Ayesh\PHP_Timer;
 
-use PHPUnit\Framework\Exception;
-
 class Timer {
-  const FORMAT_MILISECONDS = 1;
-  const FORMAT_SECONDS = 1000;
-  const FORMAT_PRECISE = 0;
+  const FORMAT_PRECISE = FALSE;
+  const FORMAT_MILISECONDS = 'ms';
+  const FORMAT_SECONDS = 's';
 
-  static $timers = [];
-
+  private static $timers = [];
 
   static private function getCurrentTime() {
     return microtime(true);
@@ -32,6 +29,10 @@ class Timer {
 
   static public function reset($key = 'default') {
     unset(static::$timers[$key]);
+  }
+
+  static public function resetAll() {
+    static::$timers = [];
   }
 
   final static protected function processTimerValue($value, $format) {
