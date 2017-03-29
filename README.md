@@ -25,10 +25,10 @@ The simplest way would be to install using [composer](https://getcomposer.org).
     
 If, for some reason you can't use Composer, or don't want to (oh come on!), you can integrate the class with your current `PSR-4` autoloader by mapping `Ayesh\PHP_TIMER` namespace to the repository's `src` folder. 
 
-##Usage
+## Usage
 It is pretty simple to use the timer, with all methods being static, and allowing only 4 methods. 
 
-####Start timer
+#### Start timer
 
     use Ayesh\PHP_Timer\Timer;
     Timer::start();
@@ -43,7 +43,7 @@ You can of course use PHP magic constants to make things easier:
     Timer::start(__FUNCTION__);
 Attempting to start the timer with a non-scalar key will throw a `\TypeError` exception.
 
-####Read timer
+#### Read timer
 After starting the timer, you can read the elapsed time at any time. Reading the time will not stop the timer. You can read the timer, do some expensive calculations, and read again to get the cumulative time. 
 
     Timer::read(); // Default timer. 
