@@ -12,6 +12,10 @@ class TimerTest extends TestCase {
     Timer::start(new \stdClass());
   }
 
+  private function sleepHalfSec(int $count = 1) {
+    usleep(500000 * $count);
+  }
+
   public function testValidBareStart() {
     Timer::resetAll();
     Timer::start();
@@ -23,7 +27,7 @@ class TimerTest extends TestCase {
     Timer::start(__FUNCTION__);
     Timer::stop(__FUNCTION__);
     $stopped_at = Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE);
-    usleep(500);
+    $this->sleepHalfSec();
     $this->assertEquals(Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE), $stopped_at);
   }
 
@@ -31,15 +35,15 @@ class TimerTest extends TestCase {
     Timer::start(__FUNCTION__);
     $stopped_at = Timer::read(__FUNCTION__);
     usleep(500);
-    $this->assertNotEquals(Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE), $stopped_at);
+    $this->assertGreaterThan($stopped_at, Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE));
   }
 
   public function testIndividualTimersRunConcurrent() {
-    timer::resetAll();
+    Timer::resetAll();
 
-    timer::start(1);
-    timer::start(2);
-    timer::start(3);
+    Timer::start(1);
+    Timer::start(2);
+    Timer::start(3);
 
     Timer::stop(1);
     $timer_1 = Timer::read(1, Timer::FORMAT_PRECISE);
@@ -52,20 +56,37 @@ class TimerTest extends TestCase {
   }
 
   public function testMultipleStartsQueued() {
-    Timer::start(__FUNCTION__);
-    usleep(500);
-    $timer_1 = Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE);
+    $key = __FUNCTION__;
+    Timer::start($key);
+    $this->sleepHalfSec();
+    $timer_1 = Timer::read($key, Timer::FORMAT_PRECISE);
+    $this->assertGreaterThanOrEqual(450, $timer_1);
 
-    Timer::start(__FUNCTION__);
-    usleep(500);
-    $timer_2 = Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE);
+    Timer::start($key);
+    $this->sleepHalfSec();
+    $timer_2 = Timer::read($key, Timer::FORMAT_PRECISE);
+    $this->assertGreaterThanOrEqual(900, $timer_2);
 
-    Timer::start(__FUNCTION__);
-    usleep(500);
-    $timer_3 = Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE);
+    Timer::start($key);
+    $this->sleepHalfSec(2);
+    $timer_3 = Timer::read($key, Timer::FORMAT_PRECISE);
+    $this->assertGreaterThanOrEqual(1900, $timer_3);
 
-    $this->assertTrue($timer_2 > $timer_1);
-    $this->assertTrue($timer_3 > $timer_2);
+    $this->assertGreaterThan($timer_1, $timer_2);
+    $this->assertGreaterThan($timer_2, $timer_3);
+    $this->assertGreaterThan($timer_1 + $timer_2, $timer_3);
+  }
+
+  public function testMultpleStartCallsQueued_2() {
+    $key = 'foo';
+    Timer::start($key);
+    $this->assertLessThan(500, Timer::read($key));
+    $this->sleepHalfSec(2);
+    $this->assertGreaterThanOrEqual(1000, Timer::read($key));
+    Timer::start($key);
+    $this->sleepHalfSec();
+    $this->assertGreaterThanOrEqual(1500, Timer::read($key));
+    $this->assertLessThan(2000, Timer::read($key));
   }
 
   public function testStopAndGoTimer() {
