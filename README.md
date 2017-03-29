@@ -112,11 +112,10 @@ Currently, the following formats are provided:
     echo "<br />";
     echo Timer::read('laps', Timer::FORMAT_SECONDS); // 2 seconds (1 + 1)
 
-##Development and tests
+## Development and tests
 All issues are PRs are welcome. Travis CI and PHPUnit tests are included. If you are adding new features, please make sure to add the test coverage.
 
-##Credits
+## Credits
 By [Ayesh Karunaratne](https://ayesh.me).
 
-
-
+kthxbye
