@@ -3,10 +3,14 @@
     "description": "Timer start, stop, read, and minimal conversion. Not phpunit/php-timer I promise.",
     "type": "library",
     "license": "MIT",
+    "keywords": ["timer", "stopwatch", "time", "performance", "benchmark"],
+    "homepage": "https://github.com/ayesh/php-timer",
     "authors": [
         {
             "name": "Ayesh Karunaratne",
-            "email": "ayesh@ayesh.me"
+            "email": "ayesh@ayesh.me",
+            "homepage": "https://ayesh.me?packagist",
+            "role": "Developer"
         }
     ],
     "require": {
@@ -20,9 +24,8 @@
             "Ayesh\\PHP_Timer\\": "src"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Ayesh\\PHP_Timper\\Test\\": "tests"
-        }
+    "support": {
+        "issues": "https://github.com/Ayesh/php-timer/issues",
+        "source": "https://github.com/Ayesh/php-timer"
     }
 }
