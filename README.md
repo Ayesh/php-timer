@@ -41,7 +41,7 @@ Once you start the time with a given key, you can use the same key to refer to t
 You can of course use PHP magic constants to make things easier:
 
     Timer::start(__FUNCTION__);
-Attempting to start the timer with a non-scalar key will throw an `\InvalidArgumentException` exception.
+Attempting to start the timer with a non-scalar key will throw a `\TypeError` exception.
 
 ####Read timer
 After starting the timer, you can read the elapsed time at any time. Reading the time will not stop the timer. You can read the timer, do some expensive calculations, and read again to get the cumulative time. 
