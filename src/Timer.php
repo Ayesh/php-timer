@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Ayesh\PHP_Timer;
 
@@ -6,6 +7,7 @@ class Timer {
   const FORMAT_PRECISE = FALSE;
   const FORMAT_MILLISECONDS = 'ms';
   const FORMAT_SECONDS = 's';
+  const FORMAT_HUMAN = 'h';
 
   private static $timers = [];
 
@@ -13,11 +15,8 @@ class Timer {
     return microtime(true);
   }
 
-  static public function start($key = 'default') {
-    if (!is_scalar($key)) {
-      throw new \InvalidArgumentException('Key should be a scalar value.');
-    }
-    elseif (isset(static::$timers[$key])) {
+  static public function start(string $key = 'default') {
+    if (isset(static::$timers[$key])) {
       if (empty(static::$timers[$key][0])) {
         static::$timers[$key][0] = true;
         static::$timers[$key][1] = static::getCurrentTime();
@@ -32,11 +31,11 @@ class Timer {
     }
   }
 
-  static public function reset($key = 'default') {
+  static public function reset(string $key = 'default'): void {
     unset(static::$timers[$key]);
   }
 
-  static public function resetAll() {
+  static public function resetAll(): void {
     static::$timers = [];
   }
 
@@ -44,9 +43,7 @@ class Timer {
     if ($value[0]) {
       return static::formatTime((static::getCurrentTime() - $value[1]) + $value[2], $format);
     }
-    else {
-      return static::formatTime($value[2], $format);
-    }
+    return static::formatTime($value[2], $format);
   }
 
   static protected function formatTime($value, $format) {
@@ -66,18 +63,18 @@ class Timer {
     }
   }
 
-  static public function read($key = 'default', $format = self::FORMAT_MILLISECONDS) {
+  static public function read(string $key = 'default', $format = self::FORMAT_MILLISECONDS) {
     if (isset(static::$timers[$key])) {
       return static::processTimerValue(static::$timers[$key], $format);
     }
     throw new \LogicException('Reading timer when the given key timer was not initialized.');
   }
 
-  static public function stop($key = 'default') {
+  static public function stop($key = 'default'): void {
     if (isset(static::$timers[$key])) {
       $ct = static::getCurrentTime();
       static::$timers[$key][0] = false;
-      static::$timers[$key][2] = static::$timers[$key][2] + ($ct - static::$timers[$key][1]);
+      static::$timers[$key][2] += $ct - static::$timers[$key][1];
     }
     else {
       throw new \LogicException('Stopping timer when the given key timer was not initialized.');
