@@ -31,11 +31,11 @@ class Timer {
     }
   }
 
-  static public function reset(string $key = 'default'): void {
+  static public function reset(string $key = 'default') {
     unset(static::$timers[$key]);
   }
 
-  static public function resetAll(): void {
+  static public function resetAll() {
     static::$timers = [];
   }
 
@@ -70,7 +70,7 @@ class Timer {
     throw new \LogicException('Reading timer when the given key timer was not initialized.');
   }
 
-  static public function stop($key = 'default'): void {
+  static public function stop($key = 'default') {
     if (isset(static::$timers[$key])) {
       $ct = static::getCurrentTime();
       static::$timers[$key][0] = false;
