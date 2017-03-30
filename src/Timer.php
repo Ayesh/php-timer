@@ -21,13 +21,13 @@ class Timer {
    * Stores all the timers statically.
    * @var array
    */
-  private static $timers = [];
+  static private $timers = [];
 
   /**
    * Returns the current time as a float.
    * @return float
    */
-  static private function getCurrentTime(): float {
+  private static function getCurrentTime(): float {
     return microtime(true);
   }
 
@@ -43,7 +43,7 @@ class Timer {
    *
    * @param string $key
    */
-  static public function start(string $key = 'default') {
+  public static function start(string $key = 'default') {
     if (isset(static::$timers[$key])) {
       if (empty(static::$timers[$key][0])) {
         static::$timers[$key][0] = true;
@@ -64,7 +64,7 @@ class Timer {
    * To reset all timers, call @see \Ayesh\PHP_Timer\Timer::resetAll().
    * @param string $key
    */
-  static public function reset(string $key = 'default') {
+  public static function reset(string $key = 'default') {
     unset(static::$timers[$key]);
   }
 
@@ -72,7 +72,7 @@ class Timer {
    * Resets ALL timers.
    * To reset a specific timer, @see \Ayesh\PHP_Timer\Timer::reset().
    */
-  static public function resetAll() {
+  public static function resetAll() {
     static::$timers = [];
   }
 
@@ -82,7 +82,7 @@ class Timer {
    * @param $format
    * @return mixed
    */
-  final static protected function processTimerValue($value, $format) {
+  final protected static function processTimerValue($value, $format) {
     if ($value[0]) {
       return static::formatTime((static::getCurrentTime() - $value[1]) + $value[2], $format);
     }
@@ -95,7 +95,7 @@ class Timer {
    * @param $format
    * @return float
    */
-  static protected function formatTime($value, $format) {
+  private static function formatTime($value, $format) {
     switch ($format) {
 
       case static::FORMAT_PRECISE;
@@ -127,7 +127,7 @@ class Timer {
    * @return mixed The formatted time.
    * @throws \LogicException
    */
-  static public function read(string $key = 'default', $format = self::FORMAT_MILLISECONDS) {
+  public static function read(string $key = 'default', $format = self::FORMAT_MILLISECONDS) {
     if (isset(static::$timers[$key])) {
       return static::processTimerValue(static::$timers[$key], $format);
     }
@@ -138,7 +138,7 @@ class Timer {
    * Stops the timer with the given key. Default key is "default"
    * @param string $key
    */
-  static public function stop($key = 'default') {
+  public static function stop($key = 'default') {
     if (isset(static::$timers[$key])) {
       $ct = static::getCurrentTime();
       static::$timers[$key][0] = false;
