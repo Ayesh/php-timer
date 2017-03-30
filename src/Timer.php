@@ -44,14 +44,14 @@ class Timer {
    * @param string $key
    */
   public static function start(string $key = 'default') {
-    if (isset(static::$timers[$key])) {
-      if (empty(static::$timers[$key][0])) {
-        static::$timers[$key][0] = true;
-        static::$timers[$key][1] = static::getCurrentTime();
+    if (isset(self::$timers[$key])) {
+      if (empty(self::$timers[$key][0])) {
+        self::$timers[$key][0] = true;
+        self::$timers[$key][1] = static::getCurrentTime();
       }
     }
     else {
-      static::$timers[$key] = [
+      self::$timers[$key] = [
         true,
         static::getCurrentTime(),
         0
@@ -65,7 +65,7 @@ class Timer {
    * @param string $key
    */
   public static function reset(string $key = 'default') {
-    unset(static::$timers[$key]);
+    unset(self::$timers[$key]);
   }
 
   /**
@@ -73,7 +73,7 @@ class Timer {
    * To reset a specific timer, @see \Ayesh\PHP_Timer\Timer::reset().
    */
   public static function resetAll() {
-    static::$timers = [];
+    self::$timers = [];
   }
 
   /**
@@ -82,7 +82,7 @@ class Timer {
    * @param $format
    * @return mixed
    */
-  final protected static function processTimerValue($value, $format) {
+  protected static function processTimerValue($value, $format) {
     if ($value[0]) {
       return static::formatTime((static::getCurrentTime() - $value[1]) + $value[2], $format);
     }
@@ -128,8 +128,8 @@ class Timer {
    * @throws \LogicException
    */
   public static function read(string $key = 'default', $format = self::FORMAT_MILLISECONDS) {
-    if (isset(static::$timers[$key])) {
-      return static::processTimerValue(static::$timers[$key], $format);
+    if (isset(self::$timers[$key])) {
+      return static::processTimerValue(self::$timers[$key], $format);
     }
     throw new \LogicException('Reading timer when the given key timer was not initialized.');
   }
@@ -139,10 +139,10 @@ class Timer {
    * @param string $key
    */
   public static function stop($key = 'default') {
-    if (isset(static::$timers[$key])) {
+    if (isset(self::$timers[$key])) {
       $ct = static::getCurrentTime();
-      static::$timers[$key][0] = false;
-      static::$timers[$key][2] += $ct - static::$timers[$key][1];
+      self::$timers[$key][0] = false;
+      self::$timers[$key][2] += $ct - self::$timers[$key][1];
     }
     else {
       throw new \LogicException('Stopping timer when the given key timer was not initialized.');
