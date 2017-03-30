@@ -1,5 +1,5 @@
 <?php
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Ayesh\PHP_Timer;
 
@@ -49,8 +49,7 @@ class Timer {
         self::$timers[$key][0] = true;
         self::$timers[$key][1] = self::getCurrentTime();
       }
-    }
-    else {
+    } else {
       self::$timers[$key] = [
         true,
         self::getCurrentTime(),
@@ -143,8 +142,7 @@ class Timer {
       $ct = self::getCurrentTime();
       self::$timers[$key][0] = false;
       self::$timers[$key][2] += $ct - self::$timers[$key][1];
-    }
-    else {
+    } else {
       throw new \LogicException('Stopping timer when the given key timer was not initialized.');
     }
   }
