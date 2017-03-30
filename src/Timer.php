@@ -98,7 +98,7 @@ class Timer {
   private static function formatTime($value, $format) {
     switch ($format) {
 
-      case static::FORMAT_PRECISE;
+      case static::FORMAT_PRECISE:
         return $value * 1000;
 
       case static::FORMAT_MILLISECONDS:
