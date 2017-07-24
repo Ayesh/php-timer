@@ -1,6 +1,6 @@
 {
     "name": "ayesh/php-timer",
-    "description": "Timer start, stop, read, and minimal conversion. Not phpunit/php-timer I promise.",
+    "description": "Stop-watch for all your needs. Supports timer start, pause, resume, stop, read, and minimal conversion.",
     "type": "library",
     "license": "MIT",
     "keywords": ["timer", "stopwatch", "time", "performance", "benchmark"],
@@ -21,7 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ayesh\\PHP_Timer\\": "src"
+            "Ayesh\\PHP_Timer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ayesh\\PHP_Timer\\Tests\\": "tests/"
         }
     },
     "support": {
