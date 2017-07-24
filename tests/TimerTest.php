@@ -1,6 +1,6 @@
 <?php
 
-namespace Ayesh\PHP_Timer\Test;
+namespace Ayesh\PHP_Timer\Tests;
 
 use Ayesh\PHP_Timer\Timer;
 use PHPUnit\Framework\TestCase;
