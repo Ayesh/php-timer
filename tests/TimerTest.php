@@ -77,7 +77,7 @@ class TimerTest extends TestCase {
     $this->assertGreaterThan($timer_1 + $timer_2, $timer_3);
   }
 
-  public function testMultpleStartCallsQueued_2() {
+  public function testMultipleStartCallsQueued_2() {
     $key = 'foo';
     Timer::start($key);
     $this->assertLessThan(500, Timer::read($key));

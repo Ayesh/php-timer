@@ -6,7 +6,7 @@ namespace Ayesh\PHP_Timer;
 /**
  * Class Timer
  *
- * Helper class to measure the execusion time between two points in a single
+ * Helper class to measure the execution time between two points in a single
  * request.
  *
  * @package Ayesh\PHP_Timer
@@ -76,7 +76,7 @@ class Timer {
   }
 
   /**
-   * Pocesses the internal timer state to return the time elapsed.
+   * Processes the internal timer state to return the time elapsed.
    * @param $value
    * @param $format
    * @return mixed
@@ -135,7 +135,10 @@ class Timer {
 
   /**
    * Stops the timer with the given key. Default key is "default"
+   *
    * @param string $key
+   *
+   * @throws \LogicException If the attempted timer has not started already.
    */
   public static function stop($key = 'default') {
     if (isset(self::$timers[$key])) {
