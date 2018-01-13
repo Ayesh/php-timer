@@ -144,7 +144,7 @@ class TimerTest extends TestCase {
 
   public function testValidSecondsCount() {
     Timer::start(__FUNCTION__);
-    $this->assertInternalType('double', Timer::read(__FUNCTION__));
+    $this->assertInternalType('string', Timer::read(__FUNCTION__));
   }
 
   public function testDenyAccessWithoutInitializing() {
