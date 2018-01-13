@@ -1,6 +1,6 @@
 # PHP Timer
 
-[![Latest Stable Version](https://poser.pugx.org/ayesh/php-timer/v/stable)](https://packagist.org/packages/ayesh/php-timer) [![License](https://poser.pugx.org/ayesh/php-timer/license)](https://packagist.org/packages/ayesh/php-timer)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ayesh/php-timer/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Ayesh/php-timer/?branch=master) [![Build Status](https://travis-ci.org/Ayesh/php-timer.svg?branch=master)](https://travis-ci.org/Ayesh/php-timer)  [![codecov](https://codecov.io/gh/Ayesh/php-timer/branch/master/graph/badge.svg)](https://codecov.io/gh/Ayesh/php-timer) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/54bcf54f-5087-45bf-9813-63c79a06a642/mini.png)](https://insight.sensiolabs.com/projects/54bcf54f-5087-45bf-9813-63c79a06a642) [![Too many badges](https://img.shields.io/badge/style-too_many-brightgreen.svg?style=toomany&label=badges)](https://github.com/Ayesh/php-timer)
+[![Latest Stable Version](https://poser.pugx.org/ayesh/php-timer/v/stable)](https://packagist.org/packages/ayesh/php-timer) [![License](https://poser.pugx.org/ayesh/php-timer/license)](https://packagist.org/packages/ayesh/php-timer)  [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Ayesh/php-timer/badges/quality-score.png?b=v2)](https://scrutinizer-ci.com/g/Ayesh/php-timer/?branch=v2) [![Build Status](https://travis-ci.org/Ayesh/php-timer.svg?branch=v2)](https://travis-ci.org/Ayesh/php-timer)  [![codecov](https://codecov.io/gh/Ayesh/php-timer/branch/v2/graph/badge.svg)](https://codecov.io/gh/Ayesh/php-timer) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/54bcf54f-5087-45bf-9813-63c79a06a642/mini.png)](https://insight.sensiolabs.com/projects/54bcf54f-5087-45bf-9813-63c79a06a642) [![Too many badges](https://img.shields.io/badge/style-too_many-brightgreen.svg?style=toomany&label=badges)](https://github.com/Ayesh/php-timer)
 
 ## Synopsis
 A helper class to calculate how long a particular task took. 
@@ -13,10 +13,11 @@ This class is similar to phpunit/php-timer, but not a fork, nor mimic its functi
  - Dead simple API with only 4 static methods.
  - 100% unit test coverage.
  - Gets you precise time in milliseconds (with options to convert to seconds)
+ - Individual `Stopwatch` class for serialization and other use cases.
 
 ## Prerequisites
 
- - PHP 7.0 or later.
+ - PHP 7.1 or later.
  
 ## Installing
 The simplest way would be to install using [composer](https://getcomposer.org). 
