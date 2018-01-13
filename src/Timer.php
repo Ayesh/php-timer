@@ -12,24 +12,16 @@ namespace Ayesh\PHP_Timer;
  * @package Ayesh\PHP_Timer
  */
 class Timer {
-  const FORMAT_PRECISE = FALSE;
-  const FORMAT_MILLISECONDS = 'ms';
-  const FORMAT_SECONDS = 's';
-  const FORMAT_HUMAN = 'h';
+  public const FORMAT_PRECISE = FALSE;
+  public const FORMAT_MILLISECONDS = 'ms';
+  public const FORMAT_SECONDS = 's';
+  public const FORMAT_HUMAN = 'h';
 
   /**
    * Stores all the timers statically.
-   * @var array
+   * @var Stopwatch[]
    */
   static private $timers = [];
-
-  /**
-   * Returns the current time as a float.
-   * @return float
-   */
-  private static function getCurrentTime(): float {
-    return microtime(true);
-  }
 
   /**
    * Start or resume the timer.
@@ -43,18 +35,12 @@ class Timer {
    *
    * @param string $key
    */
-  public static function start(string $key = 'default') {
+  public static function start(string $key = 'default'): void {
     if (isset(self::$timers[$key])) {
-      if (empty(self::$timers[$key][0])) {
-        self::$timers[$key][0] = true;
-        self::$timers[$key][1] = self::getCurrentTime();
-      }
-    } else {
-      self::$timers[$key] = [
-        true,
-        self::getCurrentTime(),
-        0
-      ];
+      self::$timers[$key]->start();
+    }
+    else {
+      self::$timers[$key] = new Stopwatch();
     }
   }
 
@@ -63,7 +49,7 @@ class Timer {
    * To reset all timers, call @see \Ayesh\PHP_Timer\Timer::resetAll().
    * @param string $key
    */
-  public static function reset(string $key = 'default') {
+  public static function reset(string $key = 'default'): void {
     unset(self::$timers[$key]);
   }
 
@@ -71,21 +57,8 @@ class Timer {
    * Resets ALL timers.
    * To reset a specific timer, @see \Ayesh\PHP_Timer\Timer::reset().
    */
-  public static function resetAll() {
+  public static function resetAll(): void {
     self::$timers = [];
-  }
-
-  /**
-   * Processes the internal timer state to return the time elapsed.
-   * @param $value
-   * @param $format
-   * @return mixed
-   */
-  protected static function processTimerValue($value, $format) {
-    if ($value[0]) {
-      return self::formatTime((self::getCurrentTime() - $value[1]) + $value[2], $format);
-    }
-    return self::formatTime($value[2], $format);
   }
 
   /**
@@ -94,20 +67,20 @@ class Timer {
    * @param $format
    * @return float
    */
-  private static function formatTime($value, $format) {
+  private static function formatTime($value, $format): string {
     switch ($format) {
 
       case static::FORMAT_PRECISE:
-        return $value * 1000;
+        return (string) ($value * 1000);
 
       case static::FORMAT_MILLISECONDS:
-        return round($value * 1000, 2);
+        return (string) round($value * 1000, 2);
 
       case static::FORMAT_SECONDS:
-        return round($value, 3);
+        return (string) round($value, 3);
 
       default:
-        return $value * 1000;
+        return (string) ($value * 1000);
     }
   }
 
@@ -128,7 +101,7 @@ class Timer {
    */
   public static function read(string $key = 'default', $format = self::FORMAT_MILLISECONDS) {
     if (isset(self::$timers[$key])) {
-      return self::processTimerValue(self::$timers[$key], $format);
+      return self::formatTime(self::$timers[$key]->read(), $format);
     }
     throw new \LogicException('Reading timer when the given key timer was not initialized.');
   }
@@ -140,11 +113,9 @@ class Timer {
    *
    * @throws \LogicException If the attempted timer has not started already.
    */
-  public static function stop($key = 'default') {
+  public static function stop($key = 'default'): void {
     if (isset(self::$timers[$key])) {
-      $ct = self::getCurrentTime();
-      self::$timers[$key][0] = false;
-      self::$timers[$key][2] += $ct - self::$timers[$key][1];
+      self::$timers[$key]->stop();
     } else {
       throw new \LogicException('Stopping timer when the given key timer was not initialized.');
     }
