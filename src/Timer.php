@@ -67,7 +67,7 @@ class Timer {
    * @param $format
    * @return string
    */
-  private static function formatTime($value, $format): string {
+  private static function formatTime(float $value, $format): string {
     switch ($format) {
 
       case static::FORMAT_PRECISE:
