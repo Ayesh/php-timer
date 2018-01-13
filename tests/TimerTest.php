@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @package Ayesh\PHP_Timer\Tests
  * @group time-sensitive
+ * @deprecated
  */
 class TimerTest extends TestCase {
 
