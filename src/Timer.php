@@ -65,7 +65,7 @@ class Timer {
    * Formats the given time the processor into the given format.
    * @param $value
    * @param $format
-   * @return float
+   * @return string
    */
   private static function formatTime($value, $format): string {
     switch ($format) {
