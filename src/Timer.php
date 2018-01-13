@@ -120,4 +120,12 @@ class Timer {
       throw new \LogicException('Stopping timer when the given key timer was not initialized.');
     }
   }
+
+  /**
+   * Return a list of timer names. Note that resetting a timer removes the timer.
+   * @return string[]
+   */
+  public static function getTimers(): array {
+    return array_keys(static::$timers);
+  }
 }

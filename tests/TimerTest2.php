@@ -73,4 +73,18 @@ class TimerTest2 extends TestCase {
     sleep(23);
     $this->assertSame('43000', Timer::read(__FUNCTION__));
   }
+
+  public function testTimerListGet() {
+    Timer::resetAll();
+    Timer::start('foo');
+    Timer::start('bar');
+    Timer::resetAll();
+    Timer::start('zfooz');
+    Timer::start('zbarz');
+    $this->assertEquals(['zfooz', 'zbarz'], Timer::getTimers());
+    Timer::start('baz');
+    $this->assertEquals(['zfooz', 'zbarz', 'baz'], Timer::getTimers());
+    Timer::reset('zbarz');
+    $this->assertEquals(['zfooz', 'baz'], Timer::getTimers());
+  }
 }
