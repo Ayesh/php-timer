@@ -126,6 +126,6 @@ class Timer {
    * @return string[]
    */
   public static function getTimers(): array {
-    return array_keys(static::$timers);
+    return array_keys(self::$timers);
   }
 }
