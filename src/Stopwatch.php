@@ -3,7 +3,6 @@
 
 namespace Ayesh\PHP_Timer;
 
-
 class Stopwatch {
   private $accrued = 0;
   private $timestamp;

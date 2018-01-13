@@ -5,6 +5,10 @@ namespace Ayesh\PHP_Timer\Tests;
 use Ayesh\PHP_Timer\Timer;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @package Ayesh\PHP_Timer\Tests
+ * @group time-sensitive
+ */
 class TimerTest extends TestCase {
 
   public function testUnsupportedKeyType(){
@@ -14,13 +18,6 @@ class TimerTest extends TestCase {
 
   private function sleepHalfSec(int $count = 1) {
     usleep(500000 * $count);
-  }
-
-  public function testValidBareStart() {
-    Timer::resetAll();
-    Timer::start();
-    $return = Timer::read('default', Timer::FORMAT_PRECISE);
-    $this->assertTrue($return > 0);
   }
 
   public function testStopValuesRetained() {
