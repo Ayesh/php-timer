@@ -9,6 +9,6 @@ namespace Ayesh\PHP_Timer;
  *
  * @package Ayesh\PHP_Timer
  */
-class Formmater {
+class Formatter {
 
 }
