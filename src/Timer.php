@@ -63,8 +63,8 @@ class Timer {
 
   /**
    * Formats the given time the processor into the given format.
-   * @param $value
-   * @param $format
+   * @param float $value
+   * @param string|bool $format
    * @return string
    */
   private static function formatTime(float $value, $format): string {
