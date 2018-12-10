@@ -17,7 +17,7 @@ This class is similar to phpunit/php-timer, but not a fork, nor mimic its functi
 
 ## Prerequisites
 
- - PHP 7.1 or later.
+ - PHP 7.2 or later.
  
 ## Installing
 The simplest way would be to install using [composer](https://getcomposer.org). 
