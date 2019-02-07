@@ -13,20 +13,20 @@ class StopwatchTest extends TestCase {
     $stopwatch = new Stopwatch();
     $stopwatch->stop();
     $time_1 = $stopwatch->read();
-    $this->assertInternalType('float', $time_1);
+    $this->assertIsFloat($time_1);
     sleep(20);
     $time_2 = $stopwatch->read();
-    $this->assertInternalType('float', $time_2);
+    $this->assertIsFloat( $time_2);
     $this->assertSame($time_1, $time_2);
   }
 
   public function testTimerContiniuous() {
     $stopwatch = new Stopwatch();
     $time_1 = $stopwatch->read();
-    $this->assertInternalType('float', $time_1);
+    $this->assertIsFloat($time_1);
     sleep(20);
     $time_2 = $stopwatch->read();
-    $this->assertInternalType('float', $time_2);
+    $this->assertIsFloat($time_2);
     $this->assertNotSame($time_1, $time_2);
   }
 
@@ -36,7 +36,7 @@ class StopwatchTest extends TestCase {
     $time_1 = $stopwatch->read();
     sleep(20);
     $time_2 = $stopwatch->read();
-    $this->assertInternalType('float', $time_2);
+    $this->assertIsFloat($time_2);
     $this->assertNotSame($time_1, $time_2);
   }
 }
