@@ -17,6 +17,12 @@ class Timer {
   public const FORMAT_SECONDS = 's';
   public const FORMAT_HUMAN = 'h';
 
+  private const TIMES = [
+    'hour'   => 3600000,
+    'minute' => 60000,
+    'second' => 1000,
+  ];
+
   /**
    * Stores all the timers statically.
    * @var Stopwatch[]
@@ -69,19 +75,33 @@ class Timer {
    */
   private static function formatTime(float $value, $format): string {
     switch ($format) {
-
-      case static::FORMAT_PRECISE:
-        return (string) ($value * 1000);
-
       case static::FORMAT_MILLISECONDS:
         return (string) round($value * 1000, 2);
 
       case static::FORMAT_SECONDS:
         return (string) round($value, 3);
 
+      case static::FORMAT_HUMAN:
+        return static::secondsToTimeString($value);
+
+      case static::FORMAT_PRECISE:
       default:
         return (string) ($value * 1000);
     }
+  }
+
+  private static function secondsToTimeString(float $time): string
+  {
+    $ms = \round($time * 1000);
+
+    foreach (self::TIMES as $unit => $value) {
+      if ($ms >= $value) {
+        $time = floor($ms / $value * 100.0) / 100.0;
+        return $time . ' ' . ($time == 1 ? $unit : $unit . 's');
+      }
+    }
+
+    return $ms . ' ms';
   }
 
   /**
