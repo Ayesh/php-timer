@@ -141,12 +141,11 @@ class Timer {
    * @throws \LogicException If the attempted timer has not started already.
    */
   public static function stop($key = 'default'): void {
-    if (isset(self::$timers[$key])) {
-      self::$timers[$key]->stop();
-    }
-    else {
+    if (!isset(self::$timers[$key])) {
       throw new \LogicException('Stopping timer when the given key timer was not initialized.');
     }
+
+    self::$timers[$key]->stop();
   }
 
   /**
