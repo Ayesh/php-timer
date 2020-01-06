@@ -50,10 +50,10 @@ class Timer {
   public static function start(string $key = 'default'): void {
     if (isset(self::$timers[$key])) {
       self::$timers[$key]->start();
+      return;
     }
-    else {
-      self::$timers[$key] = new Stopwatch();
-    }
+
+    self::$timers[$key] = new Stopwatch();
   }
 
   /**
@@ -92,6 +92,7 @@ class Timer {
     if (isset(self::$timers[$key])) {
       return self::formatTime(self::$timers[$key]->read(), $format);
     }
+
     throw new \LogicException('Reading timer when the given key timer was not initialized.');
   }
 

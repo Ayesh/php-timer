@@ -33,6 +33,7 @@ class Stopwatch {
     if ($this->running) {
       return $this->accrued + ($this->getTimestamp() - $this->timestamp);
     }
+
     return $this->accrued;
   }
 
