@@ -80,16 +80,13 @@ class Timer {
    *
    * @param string $key The key that the timer was started with. Default value is
    *   "default" throughout the class.
-   * @param string $format
+   * @param string $format The default format is milliseconds. See the class constants for additional
+   *   formats.
    *
-   * @return mixed The formatted time.
+   * @return mixed The formatted time, formatted by the formatter string passed for $format.
    * @throws \LogicException
-   * @see \Ayesh\PHP_Timer\Timer::start() was called with. If the timer was not
-   * started, a \LogicException will be thrown.
-   *
-   * The default format is milliseconds. See the class constants for additional
-   * formats.
-   *
+   * If the timer was not started, a \LogicException will be thrown. Use @see \Ayesh\PHP_Timer\Timer::start()
+   * to start a timer.
    */
   public static function read(string $key = 'default', $format = self::FORMAT_MILLISECONDS) {
     if (isset(self::$timers[$key])) {
