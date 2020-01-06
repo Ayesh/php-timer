@@ -87,6 +87,7 @@ Currently, the following formats are provided:
  - `FORMAT_PRECISE`: Precise timer value, without rounding it. e.g. `0.10180473327637`
  - `FORMAT_MILLISECONDS`:  Time in milliseconds, rounded to 2 decimals.
  - `FORMAT_SECONDS`: Time in seconds, rounded to 3 decimals.
+ - `FORMAT_HUMAN`: Time in human readable format, for example `1.05 minutes`.
 
 ## Examples
 
