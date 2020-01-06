@@ -12,16 +12,16 @@ use PHPUnit\Framework\TestCase;
  */
 class TimerTest extends TestCase {
 
-  public function testUnsupportedKeyType(){
+  public function testUnsupportedKeyType(): void {
     $this->expectException(\TypeError::class);
     Timer::start(new \stdClass());
   }
 
-  private function sleepHalfSec(int $count = 1) {
+  private function sleepHalfSec(int $count = 1): void {
     usleep(500000 * $count);
   }
 
-  public function testStopValuesRetained() {
+  public function testStopValuesRetained(): void {
     Timer::start(__FUNCTION__);
     Timer::stop(__FUNCTION__);
     $stopped_at = Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE);
@@ -29,14 +29,14 @@ class TimerTest extends TestCase {
     $this->assertEquals(Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE), $stopped_at);
   }
 
-  public function testUnstoppedValuesContinue() {
+  public function testUnstoppedValuesContinue(): void {
     Timer::start(__FUNCTION__);
     $stopped_at = Timer::read(__FUNCTION__);
     usleep(500);
     $this->assertGreaterThan($stopped_at, Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE));
   }
 
-  public function testIndividualTimersRunConcurrent() {
+  public function testIndividualTimersRunConcurrent(): void {
     Timer::resetAll();
 
     Timer::start(1);
@@ -53,7 +53,7 @@ class TimerTest extends TestCase {
     $this->assertEquals(Timer::read(1, Timer::FORMAT_PRECISE), $timer_1);
   }
 
-  public function testMultipleStartsQueued() {
+  public function testMultipleStartsQueued(): void {
     $key = __FUNCTION__;
     Timer::start($key);
     $this->sleepHalfSec();
@@ -75,7 +75,7 @@ class TimerTest extends TestCase {
     $this->assertGreaterThan($timer_1 + $timer_2, $timer_3);
   }
 
-  public function testMultipleStartCallsQueued_2() {
+  public function testMultipleStartCallsQueued_2(): void {
     $key = 'foo';
     Timer::start($key);
     $this->assertLessThan(500, Timer::read($key));
@@ -87,7 +87,7 @@ class TimerTest extends TestCase {
     $this->assertLessThan(2000, Timer::read($key));
   }
 
-  public function testStopAndGoTimer() {
+  public function testStopAndGoTimer(): void {
     Timer::start(__FUNCTION__);
     usleep(1000);
     Timer::stop(__FUNCTION__);
@@ -100,7 +100,7 @@ class TimerTest extends TestCase {
     $this->assertLessThan(0.008, $timer);
   }
 
-  public function testResetRestsTimer() {
+  public function testResetRestsTimer(): void {
     Timer::resetAll();
     Timer::start(__FUNCTION__);
     Timer::reset(__FUNCTION__);
@@ -108,7 +108,7 @@ class TimerTest extends TestCase {
     Timer::read(__FUNCTION__);
   }
 
-  public function testTimerFormat_Seconds() {
+  public function testTimerFormat_Seconds(): void {
     Timer::start(__FUNCTION__);
 
     usleep(1000);
@@ -120,7 +120,7 @@ class TimerTest extends TestCase {
     $this->assertGreaterThanOrEqual('0.002', $read);
   }
 
-  public function testTimerFormat_Unspecified() {
+  public function testTimerFormat_Unspecified(): void {
     Timer::start(__FUNCTION__);
     usleep(1500);
     $read = Timer::read(__FUNCTION__, 'unspecified');
@@ -128,7 +128,7 @@ class TimerTest extends TestCase {
     $this->assertGreaterThanOrEqual(1, $read);
   }
 
-  public function testTimerFormat_Milliseconds() {
+  public function testTimerFormat_Milliseconds(): void {
     Timer::start(__FUNCTION__);
     usleep(1500);
     $read = Timer::read(__FUNCTION__, Timer::FORMAT_MILLISECONDS);
@@ -136,19 +136,19 @@ class TimerTest extends TestCase {
     $this->assertGreaterThanOrEqual(1, $read);
   }
 
-  public function testStopWithoutInitializing() {
+  public function testStopWithoutInitializing(): void {
     Timer::resetAll();
     $this->expectException(\LogicException::class);
     Timer::stop(__FUNCTION__);
   }
 
 
-  public function testValidSecondsCount() {
+  public function testValidSecondsCount(): void {
     Timer::start(__FUNCTION__);
     $this->assertIsString(Timer::read(__FUNCTION__));
   }
 
-  public function testDenyAccessWithoutInitializing() {
+  public function testDenyAccessWithoutInitializing(): void {
     $this->expectException(\LogicException::class);
     Timer::resetAll();
     Timer::read();
