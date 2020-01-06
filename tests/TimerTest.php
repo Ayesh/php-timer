@@ -120,18 +120,6 @@ class TimerTest extends TestCase {
     $this->assertGreaterThanOrEqual('0.002', $read);
   }
 
-  public function testTimerFormat_Human() {
-    Timer::start(__FUNCTION__);
-
-    usleep(1000);
-    $read = Timer::read(__FUNCTION__, Timer::FORMAT_HUMAN);
-    $this->assertSame('1 ms', $read);
-
-    sleep(1);
-    $read = Timer::read(__FUNCTION__, Timer::FORMAT_HUMAN);
-    $this->assertSame('1 second', $read);
-  }
-
   public function testTimerFormat_Unspecified() {
     Timer::start(__FUNCTION__);
     usleep(1500);

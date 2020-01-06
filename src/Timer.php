@@ -90,8 +90,7 @@ class Timer {
     }
   }
 
-  private static function secondsToTimeString(float $time): string
-  {
+  private static function secondsToTimeString(float $time): string {
     $ms = \round($time * 1000);
 
     foreach (self::TIMES as $unit => $value) {
