@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
  * @group time-sensitive
  */
 class StopwatchTest extends TestCase {
+
   public function testTimerStoppedValueRetention(): void {
     $stopwatch = new Stopwatch();
     $stopwatch->stop();
@@ -16,13 +17,13 @@ class StopwatchTest extends TestCase {
     $this->assertIsFloat($time_1);
     sleep(20);
     $time_2 = $stopwatch->read();
-    $this->assertIsFloat( $time_2);
+    $this->assertIsFloat($time_2);
     $this->assertSame($time_1, $time_2);
   }
 
   public function testTimerContiniuous(): void {
     $stopwatch = new Stopwatch();
-    $time_1 = $stopwatch->read();
+    $time_1    = $stopwatch->read();
     $this->assertIsFloat($time_1);
     sleep(20);
     $time_2 = $stopwatch->read();

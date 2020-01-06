@@ -17,16 +17,16 @@ class TimerTest extends TestCase {
     Timer::start(new \stdClass());
   }
 
-  private function sleepHalfSec(int $count = 1): void {
-    usleep(500000 * $count);
-  }
-
   public function testStopValuesRetained(): void {
     Timer::start(__FUNCTION__);
     Timer::stop(__FUNCTION__);
     $stopped_at = Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE);
     $this->sleepHalfSec();
     $this->assertEquals(Timer::read(__FUNCTION__, Timer::FORMAT_PRECISE), $stopped_at);
+  }
+
+  private function sleepHalfSec(int $count = 1): void {
+    usleep(500000 * $count);
   }
 
   public function testUnstoppedValuesContinue(): void {

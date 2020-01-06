@@ -1,23 +1,18 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Ayesh\PHP_Timer;
 
 class Stopwatch {
+
   private $accrued = 0;
+
   private $timestamp;
+
   private $running = false;
 
   public function __construct() {
     $this->start();
-  }
-
-  private function getTimestamp(): float {
-    return microtime(true);
-  }
-
-  private function accrue(): void {
-    $this->accrued = $this->read();
   }
 
   public function start(): void {
@@ -26,8 +21,12 @@ class Stopwatch {
     }
 
     $this->accrue();
-    $this->running = true;
+    $this->running   = true;
     $this->timestamp = $this->getTimestamp();
+  }
+
+  private function accrue(): void {
+    $this->accrued = $this->read();
   }
 
   public function read(): float {
@@ -35,6 +34,10 @@ class Stopwatch {
       return $this->accrued + ($this->getTimestamp() - $this->timestamp);
     }
     return $this->accrued;
+  }
+
+  private function getTimestamp(): float {
+    return microtime(true);
   }
 
   public function stop(): float {

@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
  * @group time-sensitive
  */
 class TimerFormatterTest extends TestCase {
+
   public function testTimerFormat_Human(): void {
     Timer::start(__FUNCTION__);
 

@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
  * @group time-sensitive
  */
 class TimerTest2 extends TestCase {
+
   public function testTimerDefaultRunning() {
     Timer::start();
     sleep(20);
