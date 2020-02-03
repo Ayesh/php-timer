@@ -122,16 +122,8 @@ class Timer {
   }
 
   private static function secondsToTimeString(float $time): string {
-    $ms = \round($time * 1000);
-
-    foreach (self::TIMES as $unit => $value) {
-      if ($ms >= $value) {
-        $time = floor($ms / $value * 100.0) / 100.0;
-        return $time . ' ' . ($time == 1 ? $unit : $unit . 's');
-      }
-    }
-
-    return $ms . ' ms';
+    $ms = (int) \round($time * 1000);
+    return Formatter::formatTime($ms);
   }
 
   /**

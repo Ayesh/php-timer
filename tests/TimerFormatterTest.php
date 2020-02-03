@@ -10,16 +10,23 @@ use PHPUnit\Framework\TestCase;
  * @group time-sensitive
  */
 class TimerFormatterTest extends TestCase {
-
-  public function testTimerFormat_Human(): void {
+  public function testTimerFormat_Human3(): void {
     Timer::start(__FUNCTION__);
-
-    usleep(1000);
-    $read = Timer::read(__FUNCTION__, Timer::FORMAT_HUMAN);
-    $this->assertSame('1 ms', $read);
 
     sleep(1);
     $read = Timer::read(__FUNCTION__, Timer::FORMAT_HUMAN);
-    $this->assertSame('1 second', $read);
+    $this->assertSame('1 sec', $read);
+
+    sleep(1);
+    $read = Timer::read(__FUNCTION__, Timer::FORMAT_HUMAN);
+    $this->assertSame('2 sec', $read);
+
+    sleep(60);
+    $read = Timer::read(__FUNCTION__, Timer::FORMAT_HUMAN);
+    $this->assertSame('1 min 2 sec', $read);
+
+    sleep(86400);
+    $read = Timer::read(__FUNCTION__, Timer::FORMAT_HUMAN);
+    $this->assertSame('1 day 1 min', $read);
   }
 }
