@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class FormatterTest extends TestCase {
   public function testClassInit(): void {
     $this->expectException(\Error::class);
-    $formatter = new Formatter();
+    new Formatter();
   }
 
   public function testSecondFormatter(): void {
