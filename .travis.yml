@@ -6,12 +6,11 @@ matrix:
     - php: 7.4
     - php: nightly
   allow_failures:
-    - php: 7.4
     - php: nightly
 
 before_script:
   - composer self-update
-  - travis_retry composer install --prefer-source --no-interaction
+  - travis_retry composer install --prefer-dist --no-interaction
 script:
   - vendor/bin/phpunit --coverage-clover=coverage.xml
 after_success:
