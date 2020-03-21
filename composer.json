@@ -1,6 +1,6 @@
 {
     "name": "ayesh/php-timer",
-    "description": "Stop-watch for all your needs. Supports timer start, pause, resume, stop, read, and minimal conversion.",
+    "description": "High-resolution and monotonic stop-watch for all your needs. Supports timer start, pause, resume, stop, read, and minimal conversion.",
     "type": "library",
     "license": "MIT",
     "keywords": ["timer", "stopwatch", "time", "performance", "benchmark"],
@@ -14,10 +14,10 @@
         }
     ],
     "require": {
-        "php": "^7.2 || ^8.0"
+        "php": "^7.3 || ^8.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0",
+        "phpunit/phpunit": "^9.0",
         "symfony/phpunit-bridge": "^4.0"
     },
     "autoload": {
