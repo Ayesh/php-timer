@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Ayesh\PHP_Timer;
 
+use LogicException;
+use function round;
+
 /**
  * Class Timer
  *
@@ -84,7 +87,7 @@ class Timer {
    *   formats.
    *
    * @return mixed The formatted time, formatted by the formatter string passed for $format.
-   * @throws \LogicException
+   * @throws LogicException
    * If the timer was not started, a \LogicException will be thrown. Use @see \Ayesh\PHP_Timer\Timer::start()
    * to start a timer.
    */
@@ -93,7 +96,7 @@ class Timer {
       return self::formatTime(self::$timers[$key]->read(), $format);
     }
 
-    throw new \LogicException('Reading timer when the given key timer was not initialized.');
+    throw new LogicException('Reading timer when the given key timer was not initialized.');
   }
 
   /**
@@ -122,7 +125,7 @@ class Timer {
   }
 
   private static function secondsToTimeString(float $time): string {
-    $ms = (int) \round($time * 1000);
+    $ms = (int) round($time * 1000);
     return Formatter::formatTime($ms);
   }
 
@@ -131,11 +134,11 @@ class Timer {
    *
    * @param string $key
    *
-   * @throws \LogicException If the attempted timer has not started already.
+   * @throws LogicException If the attempted timer has not started already.
    */
   public static function stop($key = 'default'): void {
     if (!isset(self::$timers[$key])) {
-      throw new \LogicException('Stopping timer when the given key timer was not initialized.');
+      throw new LogicException('Stopping timer when the given key timer was not initialized.');
     }
 
     self::$timers[$key]->stop();

@@ -4,7 +4,7 @@
 namespace Ayesh\PHP_Timer;
 
 /**
- * Class Formmater
+ * Class Formatter
  * Formatter helper to format time intervals.
  * @internal
  * @package Ayesh\PHP_Timer
@@ -14,7 +14,7 @@ class Formatter {
   private function __construct() {
   }
 
-  public static function formatTime(int $miliseconds): string {
+  public static function formatTime(int $milliseconds): string {
     $units = [ // Do not reorder the array order.
       31536000000 => ['1 year', '@count years'],
       2592000000 => ['1 month', '@count months'],
@@ -29,9 +29,9 @@ class Formatter {
     $granularity = 2;
     $output = [];
     foreach ($units as $value => $string_pair) {
-      if ($miliseconds >= $value) {
-        $output[]    = static::formatPlural((int) floor($miliseconds / $value), $string_pair[0], $string_pair[1]);
-        $miliseconds %= $value;
+      if ($milliseconds >= $value) {
+        $output[]    = static::formatPlural((int) floor($milliseconds / $value), $string_pair[0], $string_pair[1]);
+        $milliseconds %= $value;
         $granularity--;
       }
       if ($granularity === 0) {
