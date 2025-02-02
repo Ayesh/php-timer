@@ -5,11 +5,11 @@ namespace Ayesh\PHP_Timer;
 
 class Stopwatch {
 
-  private $accrued = 0;
+  private float $accrued = 0;
 
-  private $timestamp;
+  private float $timestamp;
 
-  private $running = false;
+  private bool $running = false;
 
   public function __construct() {
     $this->start();

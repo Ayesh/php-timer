@@ -21,7 +21,7 @@ class StopwatchTest extends TestCase {
     $this->assertSame($time_1, $time_2);
   }
 
-  public function testTimerContiniuous(): void {
+  public function testTimerContinious(): void {
     $stopwatch = new Stopwatch();
     $time_1    = $stopwatch->read();
     $this->assertIsFloat($time_1);

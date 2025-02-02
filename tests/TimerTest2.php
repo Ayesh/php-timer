@@ -11,13 +11,13 @@ use PHPUnit\Framework\TestCase;
  */
 class TimerTest2 extends TestCase {
 
-  public function testTimerDefaultRunning() {
+  public function testTimerDefaultRunning(): void {
     Timer::start();
     sleep(20);
     $this->assertSame('20000', Timer::read());
   }
 
-  public function testNamedTimerRunning() {
+  public function testNamedTimerRunning(): void {
     $name = __FUNCTION__;
     Timer::start($name);
     $time_1 = Timer::read($name);
@@ -25,7 +25,7 @@ class TimerTest2 extends TestCase {
     $this->assertSame($time_1, $time_2);
   }
 
-  public function testUnknownTimerThrowsException() {
+  public function testUnknownTimerThrowsException(): void {
     Timer::start(__FUNCTION__);
     Timer::reset(__FUNCTION__);
     $this->expectException(\LogicException::class);

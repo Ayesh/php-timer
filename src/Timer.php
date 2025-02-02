@@ -35,7 +35,7 @@ class Timer {
    *
    * @var Stopwatch[]
    */
-  static private $timers = [];
+  static private array $timers = [];
 
   /**
    * Start or resume the timer.
@@ -136,7 +136,7 @@ class Timer {
    *
    * @throws LogicException If the attempted timer has not started already.
    */
-  public static function stop($key = 'default'): void {
+  public static function stop(string $key = 'default'): void {
     if (!isset(self::$timers[$key])) {
       throw new LogicException('Stopping timer when the given key timer was not initialized.');
     }
