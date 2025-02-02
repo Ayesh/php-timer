@@ -43,7 +43,7 @@ class Timer {
    * Call this method to start the timer with a given key. The default key
    * is "default", and used in @param string $key
    *
-   * @see \Ayesh\PHP_Timer\Timer::read() and reset()
+   * @see Timer::read and reset()
    * methods as well
    *
    * Calling this with the same $key will not restart the timer if it has already
@@ -63,7 +63,7 @@ class Timer {
    * Resets a specific timer, or default timer if not passed the $key parameter.
    * To reset all timers, call @param string $key
    *
-   * @see \Ayesh\PHP_Timer\Timer::resetAll().
+   * @see Timer::resetAll
    */
   public static function reset(string $key = 'default'): void {
     unset(self::$timers[$key]);
@@ -71,7 +71,7 @@ class Timer {
 
   /**
    * Resets ALL timers.
-   * To reset a specific timer, @see \Ayesh\PHP_Timer\Timer::reset().
+   * To reset a specific timer, @see Timer::reset
    */
   public static function resetAll(): void {
     self::$timers = [];

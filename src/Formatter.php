@@ -4,8 +4,7 @@
 namespace Ayesh\PHP_Timer;
 
 /**
- * Class Formatter
- * Formatter helper to format time intervals.
+ * Class Formatter - Helper to format time intervals.
  * @internal
  * @package Ayesh\PHP_Timer
  */
