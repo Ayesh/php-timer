@@ -17,13 +17,13 @@ jobs:
           - windows-latest
 
         php:
-          - "7.3"
-          - "7.4"
-          - "8.0"
+          - "8.2"
+          - "8.3"
+          - "8.4"
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
@@ -32,12 +32,7 @@ jobs:
           extensions: dom, json, mbstring
           ini-values: assert.exception=1, zend.assertions=1
 
-      - name: Install composer dependencies ignoring platform requirements
-        if: matrix.php == '8.0'
-        run: composer install --no-ansi --no-interaction --no-progress --no-suggest --ignore-platform-reqs
-
       - name: Install composer dependencies
-        if: matrix.php != '8.0'
         run: composer update --no-ansi --no-interaction --no-progress --no-suggest
 
       - name: Run tests with phpunit
