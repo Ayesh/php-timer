@@ -88,40 +88,32 @@ class Timer {
    *
    * @return mixed The formatted time, formatted by the formatter string passed for $format.
    * @throws LogicException
-   * If the timer was not started, a \LogicException will be thrown. Use @see \Ayesh\PHP_Timer\Timer::start()
+   * If the timer was not started, a \LogicException will be thrown. Use @see Timer::start
    * to start a timer.
    */
-  public static function read(string $key = 'default', $format = self::FORMAT_MILLISECONDS) {
-    if (isset(self::$timers[$key])) {
-      return self::formatTime(self::$timers[$key]->read(), $format);
+  public static function read(string $key = 'default', string $format = self::FORMAT_MILLISECONDS): string {
+    if (!isset(self::$timers[$key])) {
+      throw new LogicException('Reading timer when the given key timer was not initialized.');
     }
 
-    throw new LogicException('Reading timer when the given key timer was not initialized.');
+    return self::formatTime(self::$timers[$key]->read(), $format);
   }
 
   /**
    * Formats the given time the processor into the given format.
    *
    * @param float $value
-   * @param string|bool $format
+   * @param string $format
    *
    * @return string
    */
-  private static function formatTime(float $value, $format): string {
-    switch ($format) {
-      case static::FORMAT_MILLISECONDS:
-        return (string) round($value * 1000, 2);
-
-      case static::FORMAT_SECONDS:
-        return (string) round($value, 3);
-
-      case static::FORMAT_HUMAN:
-        return static::secondsToTimeString($value);
-
-      case static::FORMAT_PRECISE:
-      default:
-        return (string) ($value * 1000);
-    }
+  private static function formatTime(float $value, string $format): string {
+    return match ($format) {
+      static::FORMAT_MILLISECONDS => (string) round($value * 1000, 2),
+      static::FORMAT_SECONDS => (string) round($value, 3),
+      static::FORMAT_HUMAN => static::secondsToTimeString($value),
+      default => (string) ($value * 1000),
+    };
   }
 
   private static function secondsToTimeString(float $time): string {
